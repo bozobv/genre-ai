@@ -1,0 +1,96 @@
+
+saját modell felépítése
+
+szózsák modell 
+
+heurisztika 
+vagy tanuló rendszer
+
+ami kell --> dokumentum gyűjtemény, műfaji besorolással
+
+két szintű skála --> durvább és finomabb kategorizálás
+
+bag of worlds modellek --> szókészlet
+elég néhány kategória
+
+corpus
+több ezres, akár százezres --> nagyobbakat kisebbekre lehet csapni
+dolgokat ki lehet csapkodni
+
+10-100 ezres nagyságrendben --> néhány tíz oldalasak
+saját alapján pár száz is elég
+
+különböző nyelvekre is lehet nézni
+
+
+
+
+
+browns: újság
+reuters: újság
+
+
+
+
+
+gutenberg: 60 ezer könyv
+
+
+alap: 
+szózsák leggyakoribb szavak
+
+
+szózsák csak a hipotézis megfogalmazásánál megfelelő
+szózsák összehasonlításra jó
+nem elegendő egy adott feladat megoldására
+
+szózsák a magyar nyelvben érzelmek felismeréséhez a magyar nyelvben hasznos
+
+
+
+eredmény összehasonlítására kell
+cikkek leentése számokkal
+
+előfeldolgozása a corpusoknak
+kisebb fájlokra leképezni
+sebességre rámenni
+méretnek azonos méretűnek kell lennie
+elősször használatnak legyen meg
+
+program összerakása a meghatározáshoz
+kigyűjteni külön fájlnak, és abból összehasonlítani --> confusion matrix
+mérőszámot összeálítani
+
+saját bag of words
+-adatb 70-80% a betanítás, tanítóhalmaz
+-maradék 20-30% a teszhalmazra
+-utánajárni mire érdemes rászűrni, normalizálásra, milyen gyakoriság érték mellett
+-statisztika készítése, abból használni 
+-nltk-t kipróbálni hozzá
+
+rövid összefoglaló írása szerdáig
+
+
+
+
+
+milyennek értékelem
+
+nem teljes a siker
+
+nem sikerült mindent megcsinálnom amit szerettem volna 
+
+az eredmény sem olyan jó
+
+
+
+nem kéértem sokszor segítséget amikor kellett volna
+
+
+coursera
+programming historian
+irodalmi hivatkozások megadása
+
+
+
+

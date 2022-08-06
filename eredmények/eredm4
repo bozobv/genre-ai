@@ -1,0 +1,19 @@
+detective : 0.6665319865319865
+romance : 0.3199600798403193
+fantasy : 0.53,51674224682774
+scifi : 0.92,82700421940927
+western : 0.94,25076452599388
+
+
+detective: 0.02,1575110227071783
+romance : 0.04,4082413615890284
+fantasy : 0.04,871718117496336
+scifi : 0.01,4015384718259482
+western : 0.02,472340419744065
+
+
+
+detective:  {'police': 0.035301515370506, 'marple': 0.022063447106566252, 'boathouse': 0.0194158334537783, 'sherlock': 0.012058788141576897, 'riverview': 0.010590454611151802, 'criminologist': 0.009044091106182673, 'chums': 0.00844291779994431, 'swag': 0.007942840958363851, 'craig': 0.0075367425884855605, 'oakvale': 0.007060303074101201, 'airport': 0.007034293082586523, 'mademoiselle': 0.0067226893823138295, 'clavering': 0.006531843576687487, 'plutocrat': 0.00617776518983855, 'noddy': 0.00617776518983855, 'lecoq': 0.00617776518983855, 'cheslow': 0.00617776518983855, 'alvirah': 0.00617776518983855, 'sidell': 0.00617776518983855, 'crooks': 0.005882353209524601, 'dorfield': 0.005295227305575901, 'euston': 0.005295227305575901, 'briarwood': 0.005295227305575901, 'sleuths': 0.005295227305575901, 'blackmailers': 0.005295227305575901, 'mantelpiece': 0.005261528484023266, 'jabez': 0.005024495058990374, 'clues': 0.004649722846346141, 'incriminating': 0.004522045553091336, 'clavering': 0.004522045553091336,
+
+
+transcriber','spaceships','spaceman','earthman','spacemen','venusian','blaster','spaceport','humanoid','galactic','interstellar','spaceship','spacesuit','planets','technicians','radio','earthmen','microphone','concept','etext','telepathic','electronic','typographical','technology','setup','technician','orbital','intercom','planetary','synthetic'

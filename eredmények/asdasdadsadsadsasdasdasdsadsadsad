@@ -1,0 +1,11 @@
+siker aránya western:  {'western': 0.7217391304347827, 'scifi': 0.017391304347826087, 'detective ': 0.06086956521739131, 'romance': 0.008695652173913044, 'fantasy': 0.19130434782608696}
+siker aránya scifi:  {'western': 0.12394957983193278, 'scifi': 0.8025210084033614, 'detective ': 0.03571428571428571, 'romance': 0.0063025210084033615, 'fantasy': 0.031512605042016806}
+siker aránya detective:  {'western': 0.23316062176165803, 'scifi': 0.05181347150259067, 'detective ': 0.6010362694300518, 'romance': 0.010362694300518135, 'fantasy': 0.10362694300518134}
+siker aránya romance:  {'western': 0.192090395480226, 'scifi': 0.03389830508474576, 'detective ': 0.288135593220339, 'romance': 0.02824858757062147, 'fantasy': 0.4576271186440678}
+siker aránya fantasy:  {'western': 0.17, 'scifi': 0.065, 'detective ': 0.085, 'romance': 0.06, 'fantasy': 0.62}
+
+siker aránya western:  {'western': 0.8173913043478261, 'scifi': 0.008695652173913044, 'detective': 0.008695652173913044, 'romance': 0.008695652173913044, 'fantasy': 0.1565217391304348}
+siker aránya scifi:  {'western': 0.17436974789915966, 'scifi': 0.7710084033613446, 'detective': 0.023109243697478993, 'romance': 0.0063025210084033615, 'fantasy': 0.025210084033613446}
+siker aránya detective:  {'western': 0.25906735751295334, 'scifi': 0.046632124352331605, 'detective': 0.5751295336787565, 'romance': 0.010362694300518135, 'fantasy': 0.10880829015544041}
+siker aránya romance:  {'western': 0.2937853107344633, 'scifi': 0.02824858757062147, 'detective': 0.2598870056497175, 'romance': 0.02824858757062147, 'fantasy': 0.3898305084745763}
+siker aránya fantasy:  {'western': 0.23, 'scifi': 0.075, 'detective': 0.055, 'romance': 0.06, 'fantasy': 0.58}

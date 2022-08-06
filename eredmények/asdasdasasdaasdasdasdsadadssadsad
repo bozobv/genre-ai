@@ -1,0 +1,52 @@
+teszt:  0
+fulltest detective
+test eleje
+fulltest fantasy
+test eleje
+fulltest romance
+test eleje
+fulltest scifi
+test eleje
+fulltest western
+test eleje
+
+{'detective': {'western': 0.12626262626262627, 'scifi': 0.17757575757575755, 'detective': 0.6002020202020202, 'romance': 0.09090909090909091, 'fantasy': 0.005050505050505051}, 'fantasy': {'western': 0.03508771929824561, 'scifi': 0.15789473684210525, 'detective': 0.07602339181286549, 'romance': 0.07017543859649122, 'fantasy': 0.6608187134502924}, 'romance': {'western': 0.1437125748502994, 'scifi': 0.17365269461077845, 'detective': 0.06766467065868262, 'romance': 0.48323353293413174, 'fantasy': 0.1317365269461078}, 'scifi': {'western': 0.010548523206751054, 'scifi': 0.9514767932489452, 'detective': 0.016877637130801686, 'romance': 0.008438818565400843, 'fantasy': 0.012658227848101266}, 'western': {'western': 0.981651376146789, 'scifi': 0.009174311926605505, 'detective': 0.009174311926605505, 'romance': 0.0, 'fantasy': 0.0}}
+teszt:  1
+fulltest detective
+test eleje
+fulltest fantasy
+test eleje
+fulltest romance
+test eleje
+fulltest scifi
+test eleje
+fulltest western
+test eleje
+
+{'detective': {'western': 0.12121212121212122, 'scifi': 0.13717171717171717, 'detective': 0.6355555555555555, 'romance': 0.09090909090909091, 'fantasy': 0.015151515151515152}, 'fantasy': {'western': 0.04819277108433735, 'scifi': 0.16265060240963855, 'detective': 0.1144578313253012, 'romance': 0.04216867469879518, 'fantasy': 0.6325301204819277}, 'romance': {'western': 0.16167664670658682, 'scifi': 0.1437125748502994, 'detective': 0.1874251497005988, 'romance': 0.4293413173652695, 'fantasy': 0.07784431137724551}, 'scifi': {'western': 0.012658227848101266, 'scifi': 0.9662447257383966, 'detective': 0.002109704641350211, 'romance': 0.012658227848101266, 'fantasy': 0.006329113924050633}, 'western': {'western': 0.981651376146789, 'scifi': 0.01834862385321101, 'detective': 0.0, 'romance': 0.0, 'fantasy': 0.0}}
+teszt:  2
+fulltest detective
+test eleje
+fulltest fantasy
+test eleje
+fulltest romance
+test eleje
+fulltest scifi
+test eleje
+fulltest western
+test eleje
+
+{'detective': {'western': 0.10606060606060606, 'scifi': 0.14727272727272728, 'detective': 0.681010101010101, 'romance': 0.045454545454545456, 'fantasy': 0.020202020202020204}, 'fantasy': {'western': 0.04878048780487805, 'scifi': 0.15853658536585366, 'detective': 0.07926829268292683, 'romance': 0.06707317073170732, 'fantasy': 0.6463414634146342}, 'romance': {'western': 0.1437125748502994, 'scifi': 0.16167664670658682, 'detective': 0.09161676646706587, 'romance': 0.5011976047904192, 'fantasy': 0.10179640718562874}, 'scifi': {'western': 0.02109704641350211, 'scifi': 0.959915611814346, 'detective': 0.006329113924050633, 'romance': 0.004219409282700422, 'fantasy': 0.008438818565400843}, 'western': {'western': 0.963302752293578, 'scifi': 0.03669724770642202, 'detective': 0.0, 'romance': 0.0, 'fantasy': 0.0}}
+teszt:  3
+fulltest detective
+test eleje
+fulltest fantasy
+test eleje
+fulltest romance
+test eleje
+fulltest scifi
+test eleje
+fulltest western
+test eleje
+
+{'detective': {'western': 0.09595959595959595, 'scifi': 0.18262626262626264, 'detective': 0.6507070707070707, 'romance': 0.06060606060606061, 'fantasy': 0.010101010101010102}, 'fantasy': {'western': 0.02976190476190476, 'scifi': 0.19642857142857142, 'detective': 0.07738095238095238, 'romance': 0.08333333333333333, 'fantasy': 0.6130952380952381}, 'romance': {'western': 0.16167664670658682, 'scifi': 0.1497005988023952, 'detective': 0.13353293413173653, 'romance': 0.4772455089820359, 'fantasy': 0.07784431137724551}, 'scifi': {'western': 0.010548523206751054, 'scifi': 0.9746835443037974, 'detective': 0.008438818565400843, 'romance': 0.004219409282700422, 'fantasy': 0.002109704641350211}, 'western': {'western': 0.9724770642201835, 'scifi': 0.009174311926605505, 'detective': 0.0, 'romance': 0.01834862385321101, 'fantasy': 0.0}}

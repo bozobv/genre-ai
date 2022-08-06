@@ -1,0 +1,358 @@
+title: "Sentiment Analysis Horror Books"
+author: "Donyoe"
+output:
+  html_document:
+    code_folding: hide
+    fig_height: 7
+    fig_width: 10
+    theme: cosmo
+    toc: yes
+  pdf_document: default
+editor_options: 
+  chunk_output_type: console
+
+![](http://blog.bookbaby.com/wp-content/uploads/2016/10/Horror-Book-Banner.jpg)
+
+
+
+```{r, message=FALSE, warning=FALSE, include=FALSE}
+library(readr)
+library(data.table)
+library(sentimentr)
+library(ggplot2)
+library(stringr)
+library('wordcloud')
+library('tm')
+library('SnowballC')
+library('RSentiment')
+library('DT')
+
+train <- fread("../input/train.csv")
+```
+
+First we are going to separate the three authors in three different datasets
+
+```{r}
+eap <- train[author=="EAP"] # Edgar Allan Poe
+hpl <- train[author=="HPL"] # HP Lovecraft
+mws <- train[author=="MWS"] # Mary Wollstonecraft Shelley
+```
+
+Now that we have the datasets of each author we are going to start and analyse the Sentiment of each author
+
+# Rsentiment Package: {.tabset .tabset-fade .tabset-pills}
+
+
+## Edgar Allan Poe
+
+Here we are going to use the tm package to prepare the data and after that the Rsentiment package to calculate the sentiment. It classifies sentences into 6 categories: Positive, Negative, Very Positive, Very Negative Sarcasm and Neutral.
+
+```{r results='hide',echo=TRUE}
+corpus = Corpus(VectorSource(list(eap$text)))
+corpus = tm_map(corpus, removePunctuation)
+corpus = tm_map(corpus, content_transformer(tolower))
+corpus = tm_map(corpus, removeNumbers) 
+corpus = tm_map(corpus, stripWhitespace)
+corpus = tm_map(corpus, removeWords, stopwords('english'))
+
+dtm_eap = DocumentTermMatrix(VCorpus(VectorSource(corpus[[1]]$content)))
+freq_eap <- colSums(as.matrix(dtm_eap))
+
+sentiments_eap = calculate_sentiment(names(freq_eap))
+sentiments_eap = cbind(sentiments_eap, as.data.frame(freq_eap))
+```
+
+Now is time to calculate the sentiment:
+
+```{r}
+sent_pos_eap = sentiments_eap[sentiments_eap$sentiment == 'Positive',]
+sent_neg_eap = sentiments_eap[sentiments_eap$sentiment == 'Negative',]
+
+cat("We have less negative Sentiments: ",sum(sent_neg_eap$freq_eap)," than positive: ",sum(sent_pos_eap$freq_eap))
+```
+
+### Wordcloud Positive Sentiments and Negative
+ 
+```{r}
+par(mfrow=c(1,2))
+wordcloud(sent_pos_eap$text,sent_pos_eap$freq, min.freq=30,colors=brewer.pal(6,"Dark2"),random.order = F)
+text(x=0.5, y=1.05, "Positive")
+wordcloud(sent_neg_eap$text,sent_neg_eap$freq, min.freq=20,colors=brewer.pal(6,"Dark2"),random.order = F)
+text(x=0.5, y=1.05, "Negative")
+par(mfrow=c(1,1))
+```
+
+
+## HP Lovecraft
+
+
+```{r results='hide',echo=TRUE}
+corpus = Corpus(VectorSource(list(hpl$text)))
+corpus = tm_map(corpus, removePunctuation)
+corpus = tm_map(corpus, content_transformer(tolower))
+corpus = tm_map(corpus, removeNumbers) 
+corpus = tm_map(corpus, stripWhitespace)
+corpus = tm_map(corpus, removeWords, stopwords('english'))
+
+dtm_hpl = DocumentTermMatrix(VCorpus(VectorSource(corpus[[1]]$content)))
+freq_hpl <- colSums(as.matrix(dtm_hpl))
+
+sentiments_hpl = calculate_sentiment(names(freq_hpl))
+sentiments_hpl = cbind(sentiments_hpl, as.data.frame(freq_hpl))
+```
+
+Sentiment
+
+```{r}
+sent_pos_hpl = sentiments_hpl[sentiments_hpl$sentiment == 'Positive',]
+sent_neg_hpl = sentiments_hpl[sentiments_hpl$sentiment == 'Negative',]
+
+cat("We have more negative Sentiments: ",sum(sent_neg_hpl$freq_hpl)," than positive: ",sum(sent_pos_hpl$freq_hpl))
+```
+
+
+### Wordcloud Positive Sentiments and Negative
+
+```{r message=FALSE, warning=FALSE}
+par(mfrow=c(1,2))
+wordcloud(sent_pos_hpl$text,sent_pos_hpl$freq, min.freq=30,colors=brewer.pal(6,"Dark2"),random.order = F)
+text(x=0.5, y=1.05, "Positive")
+wordcloud(sent_neg_hpl$text,sent_neg_hpl$freq, min.freq=20,colors=brewer.pal(6,"Dark2"),random.order = F)
+text(x=0.5, y=1.05, "Negative")
+par(mfrow=c(1,1))
+```
+
+## Mary Wollstonecraft Shelley
+
+```{r results='hide',echo=TRUE}
+corpus = Corpus(VectorSource(list(mws$text)))
+corpus = tm_map(corpus, removePunctuation)
+corpus = tm_map(corpus, content_transformer(tolower))
+corpus = tm_map(corpus, removeNumbers) 
+corpus = tm_map(corpus, stripWhitespace)
+corpus = tm_map(corpus, removeWords, stopwords('english'))
+
+dtm_mws = DocumentTermMatrix(VCorpus(VectorSource(corpus[[1]]$content)))
+freq_mws <- colSums(as.matrix(dtm_mws))
+
+sentiments_mws = calculate_sentiment(names(freq_mws))
+sentiments_mws = cbind(sentiments_mws, as.data.frame(freq_mws))
+```
+
+Now is time to calculate the sentiment:
+
+```{r}
+sent_pos_mws = sentiments_mws[sentiments_mws$sentiment == 'Positive',]
+sent_neg_mws = sentiments_mws[sentiments_mws$sentiment == 'Negative',]
+
+cat("We have less negative Sentiments: ",sum(sent_neg_mws$freq_mws)," than positive: ",sum(sent_pos_mws$freq_mws))
+```
+
+### Wordcloud Positive Sentiments and Negative
+
+```{r message=FALSE, warning=FALSE}
+par(mfrow=c(1,2))
+wordcloud(sent_pos_mws$text,sent_pos_mws$freq, min.freq=30,colors=brewer.pal(6,"Dark2"))
+text(x=0.5, y=1.05, "Positive")
+wordcloud(sent_neg_mws$text,sent_neg_mws$freq, min.freq=20,colors=brewer.pal(6,"Dark2"))
+text(x=0.5, y=1.05, "Negative")
+par(mfrow=c(1,1))
+```
+
+# First Part: Conclusions
+
+* **Edgar Allan Poe** is more positive than negative in his words, he uses words like *little*, *never* or *doubt* as negative words, meanwhile the positive words he uses are *well*, *great* and *found*
+* **Hp Lovecraft** is more negative than positive, we can see negative words as *never*, *little*, *death* or *horror*, the main positive words he uses are *like*, *great*, *found* and *certain*.
+* **Mary Wollstonecraft** Shelley is more positive than negative, she uses as negative words *never*, *death*, *tears*, *little* among others and as a positive words *love*, *found*,  *hope*, *like*.
+
+
+
+# % Sentiments plot
+
+Now is time to merge the three authors
+
+```{r}
+sentiments_Allan_Poe = cbind("Author"="Edgar_Allan_poe",sentiments_eap)
+colnames(sentiments_Allan_Poe)[4] <- "freq"
+sentiments_HP_Lovecraft = cbind("Author"="HP_Lovecraft",sentiments_hpl)
+colnames(sentiments_HP_Lovecraft)[4] <- "freq"
+sentiments_Mary = cbind("Author"="Mary_Wollstonecraft_Shelley",sentiments_mws)
+colnames(sentiments_Mary)[4] <- "freq"
+
+sentiments <- rbind(sentiments_Allan_Poe[,-2],sentiments_HP_Lovecraft[,-2],sentiments_Mary[,-2])
+sentiments <- as.data.table(sentiments)
+sentiments1 <- sentiments[,.N,by=.(sentiment,Author)]
+sentiments1[,"Total":=sum(N),by=Author]
+sentiments1 <- sentiments1[,.("Percentage"=100*N/Total),by=.(Author,sentiment)]
+
+
+ggplot(sentiments1,aes(x = sentiment,y = Percentage ,fill=sentiment ))+
+  geom_bar(stat = "identity") +
+  ggtitle("Authors Sentiments")+xlab("Sentiment")+ylab("% Sentiment")+ 
+  theme(axis.text.x = element_text(angle = 45, size=8,hjust = 1))+
+  facet_wrap(~Author)
+
+```
+
+```{r}
+
+author <- train[,.N,by=author]
+
+
+sentiments_eap <- as.data.table(sentiments_eap)
+sh <- sentiments_eap[,sum(freq_eap),by=sentiment]
+sentiments_hpl <- as.data.table(sentiments_hpl)
+sm <- sentiments_hpl[,sum(freq_hpl),by=sentiment]
+sentiments_mws <- as.data.table(sentiments_mws)
+sb <- sentiments_mws[,sum(freq_mws),by=sentiment]
+
+fam1 <- cbind(sh$V1,sm$V1,sb$V1)
+fam <- cbind(author,t(fam1))
+colnames(fam) <- c("Character","Script_Lines","Neutral","Negative","Positive")
+fam
+
+```
+
+
+# Sentimentr Package
+
+Now we are going to use a different sentiment Analysis Package: sentimentr
+
+```{r}
+sents_eap <- sentiment(eap$text)
+sents_eap <- sents_eap[,.("word_count"=sum(word_count),"sentiment"=sum(sentiment)),by=element_id]
+
+sents_hpl <- sentiment(hpl$text)
+sents_hpl <- sents_hpl[,.("word_count"=sum(word_count),"sentiment"=sum(sentiment)),by=element_id]
+
+sents_mws <- sentiment(mws$text)
+sents_mws <- sents_mws[,.("word_count"=sum(word_count),"sentiment"=sum(sentiment)),by=element_id]
+
+score_eap <- cbind("Edgar_Allan_Poe",sents_eap$sentiment)
+score_hpl <- cbind("HP_Lovecraft",sents_hpl$sentiment)
+score_mws <- cbind("Mary_Wollstonecraft_Shelley",sents_mws$sentiment)
+
+all_scores <- as.data.table(rbind(score_eap,score_hpl,score_mws))
+all_scores$V2 <- as.numeric(all_scores$V2)
+colnames(all_scores) <- c("Author","Score")
+
+ggplot(data=all_scores)+
+  geom_histogram(mapping = aes(x=Score,fill=Author),binwidth = .1)+
+  facet_grid(Author~.)+
+  theme_bw()+scale_fill_brewer(palette = "Set1")+
+  labs(title="Score by Author",caption="Donyoe")
+
+
+#shapiro.test(sample(all_scores[Author=="Edgar_Allan_Poe",Score],5000))
+#shapiro.test(sample(all_scores[Author=="HP_Lovecraft",Score],5000))
+#shapiro.test(sample(all_scores[Author=="Mary_Wollstonecraft_Shelley",Score],5000))
+```
+
+
+
+# Sentiments of each author{.tabset .tabset-fade .tabset-pills}
+
+## Edgar Allan Poe
+
+```{r}
+
+# color palette
+cols <- c("#ce472e", "#f05336", "#ffd73e", "#eec73a", "#4ab04a")
+ 
+# plotting
+poe_plot <- ggplot(sents_eap, aes(x = element_id, y = sentiment, color = sentiment)) +
+theme_minimal() +
+  geom_point(aes(color = sentiment), alpha = 0.8) +
+  geom_hline(yintercept = 3, color = "#4ab04a", size = 1.5, alpha = 0.6, linetype = "longdash") +
+geom_hline(yintercept = -3, color = "#f05336", size = 1.5, alpha = 0.6, linetype = "longdash") +
+  scale_color_gradientn(colors = cols)+theme(legend.position = 'bottom',
+legend.direction = "horizontal",
+panel.grid.major = element_blank(),
+panel.grid.minor = element_blank(),
+plot.title = element_text(size = 20, face = "bold", vjust = 2, color = 'black', lineheight = 0.8),
+axis.title.x = element_text(size = 16),
+axis.title.y = element_text(size = 16),
+axis.text.y = element_text(size = 8, face = "bold", color = 'black'),
+axis.text.x = element_text(size = 8, face = "bold", color = 'black')) +
+labs(title="Edgar Allan Poe Sentiment",caption="Donyoe")
+poe_plot
+```
+
+
+## HP Lovecraft
+
+```{r}
+# plotting
+hp_plot <- ggplot(sents_hpl, aes(x = element_id, y = sentiment, color = sentiment)) +
+theme_minimal() +
+  geom_point(aes(color = sentiment), alpha = 0.8) +
+  geom_hline(yintercept = 3, color = "#4ab04a", size = 1.5, alpha = 0.6, linetype = "longdash") +
+geom_hline(yintercept = -3, color = "#f05336", size = 1.5, alpha = 0.6, linetype = "longdash") +
+  scale_color_gradientn(colors = cols)+theme(legend.position = 'bottom',
+legend.direction = "horizontal",
+panel.grid.major = element_blank(),
+panel.grid.minor = element_blank(),
+plot.title = element_text(size = 20, face = "bold", vjust = 2, color = 'black', lineheight = 0.8),
+axis.title.x = element_text(size = 16),
+axis.title.y = element_text(size = 16),
+axis.text.y = element_text(size = 8, face = "bold", color = 'black'),
+axis.text.x = element_text(size = 8, face = "bold", color = 'black')) +
+labs(title="HP Lovecraft Sentiment",caption="Donyoe")
+hp_plot
+```
+
+## Mary Wollstonecraft Shelley
+
+```{r}
+# plotting
+mary_plot <- ggplot(sents_mws, aes(x = element_id, y = sentiment, color = sentiment)) +
+theme_minimal() +
+  geom_point(aes(color = sentiment), alpha = 0.8) +
+  geom_hline(yintercept = 3, color = "#4ab04a", size = 1.5, alpha = 0.6, linetype = "longdash") +
+geom_hline(yintercept = -3, color = "#f05336", size = 1.5, alpha = 0.6, linetype = "longdash") +
+  scale_color_gradientn(colors = cols)+theme(legend.position = 'bottom',
+legend.direction = "horizontal",
+panel.grid.major = element_blank(),
+panel.grid.minor = element_blank(),
+plot.title = element_text(size = 20, face = "bold", vjust = 2, color = 'black', lineheight = 0.8),
+axis.title.x = element_text(size = 16),
+axis.title.y = element_text(size = 16),
+axis.text.y = element_text(size = 8, face = "bold", color = 'black'),
+axis.text.x = element_text(size = 8, face = "bold", color = 'black')) +
+labs(title="Mary Wollstonecraft Shelley Sentiment",caption="Donyoe")
+
+mary_plot
+```
+
+
+# Sentiments package Sentimentr
+
+```{r message=FALSE, warning=FALSE}
+# library(Rmisc)
+# layout <- matrix(c(1,2,1,3),2,2,byrow=TRUE)
+# multiplot(poe_plot, hp_plot, mary_plot, cols = 3)
+
+
+all_scores[Author=="Edgar_Allan_Poe","element":=1:19579]
+all_scores[Author=="HP_Lovecraft","element":=1:19579]
+all_scores[Author=="Mary_Wollstonecraft_Shelley","element":=1:19579]
+
+ggplot(all_scores, aes(x = element, y = Score, color = Score)) +
+theme_minimal() +
+  geom_point(aes(color = Score), alpha = 0.8) +
+  geom_hline(yintercept = 3, color = "#4ab04a", size = 1.5, alpha = 0.6, linetype = "longdash") +
+geom_hline(yintercept = -3, color = "#f05336", size = 1.5, alpha = 0.6, linetype = "longdash") +
+  scale_color_gradientn(colors = cols)+theme(legend.position = 'bottom',
+legend.direction = "horizontal",
+panel.grid.major = element_blank(),
+panel.grid.minor = element_blank(),
+plot.title = element_text(size = 20, face = "bold", vjust = 2, color = 'black', lineheight = 0.8),
+axis.title.x = element_text(size = 16),
+axis.title.y = element_text(size = 16),
+axis.text.y = element_text(size = 8, face = "bold", color = 'black'),
+axis.text.x = element_text(size = 8, face = "bold", color = 'black')) +
+labs(title="Sentiments of each text",caption="Donyoe")+
+  facet_wrap(~Author)
+
+
+
